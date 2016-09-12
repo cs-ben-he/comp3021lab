@@ -16,6 +16,7 @@ public class Note {
 		return this.title;
 	}
 	
+	// click "Source" ->click "Generate hashcode() and equals()"-> choose "title"
 	@Override
 	public int hashCode() {
 		final int prime = 31;

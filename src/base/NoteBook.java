@@ -42,8 +42,8 @@ public class NoteBook {
 		
 		for(Note n: newF.getNotes())
 		{
-			// the equals() function is applied by two same type object
-			//so we need create casting objects (because n n1 may be different class type, eg: n: TextNote but n1: ImageNote)
+			// the equals() function is applied by two same type objects
+			//so we need create casting objects (because n n1 may be different class types, eg: n: TextNote but n1: ImageNote)
 			Object o1= new Note(n.getTitle());
 			Object o2= new Note(n1.getTitle());
 			
