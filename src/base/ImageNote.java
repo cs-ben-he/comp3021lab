@@ -4,7 +4,7 @@ import java.io.File;
 
 public class ImageNote extends Note {
 
-   public File image;
+    File image;
 	
 	public ImageNote(String ImageNotename){
 		
