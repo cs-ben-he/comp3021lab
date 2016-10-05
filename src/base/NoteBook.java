@@ -1,12 +1,14 @@
 package base;
 
 import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 import java.util.Collections;
 
-public class NoteBook {
+public class NoteBook implements Serializable{
   
 	private ArrayList<Folder> folders;
+	private static final long serialVersionUID=1L;
 	
 	public NoteBook()
 	{
@@ -98,6 +100,40 @@ public class NoteBook {
 		
 		return newN;
 	}
+	
+	public boolean save(String file){
+		//todo
+		FileOutputStream fos=null;
+		ObjectOutputStream out=null;
+		try{
+			//TODO
+			fos=new FileOutputStream("file.ser");
+			out=new ObjectOutputStream(fos);
+			out.writeObject(this);
+			out.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public NoteBook(String file){
+		//TODO
+		FileInputStream fis=null;
+		ObjectInputStream in=null;
+		try{
+			fis =new FileInputStream("file.ser");
+			in=new ObjectInputStream(fis);
+			NoteBook nb=(NoteBook)in.readObject();
+			this.folders=nb.folders;
+			in.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+						
+	}
+	
 	
 	
 }
