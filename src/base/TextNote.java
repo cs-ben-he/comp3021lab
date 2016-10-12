@@ -1,9 +1,11 @@
 package base;
 import java.io.*;
+import java.util.HashMap;
+
 
 public class TextNote extends Note implements Serializable
 {
-	 String content;
+	 private String content;
 	 private static final long serialVersionUID=1L;
 	
 	public TextNote(String TextNodeName){
@@ -22,6 +24,13 @@ public class TextNote extends Note implements Serializable
 		super(f.getName());
 		this.content= getTextFromFile(f.getAbsolutePath());
 	}
+	
+	public String getContent()
+	{
+		return this.content;
+	}
+	
+	// lab 5
 	
 	private String getTextFromFile(String absolutePath){
 		String result = "";
@@ -46,11 +55,18 @@ public class TextNote extends Note implements Serializable
 	
 	public void exportTextToFile(String pathFolder){
 		//TODO
-	
-		File file =new File(pathFolder + this.getTitle().replaceAll(" ", "_")+".txt");
+		File file=null;
+		
+	    if(pathFolder=="")
+	    	 file =new File(pathFolder + this.getTitle().replaceAll(" ", "_")+".txt");
+	    
+	    else
+	     	 file =new File(pathFolder + File.separator + this.getTitle().replaceAll(" ", "_")+".txt");
+	    
+		
 		//TODO
 		try{
-			BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			out.write(this.content);
 			out.close();
 			
@@ -60,4 +76,32 @@ public class TextNote extends Note implements Serializable
 			e.printStackTrace();
 		}
 	}
+	
+	//lab 6
+	public Character countLetters(){
+		HashMap<Character,Integer> count = new HashMap<Character,Integer>();
+		String a = this.getTitle() + this.getContent();
+		int b = 0;
+		Character r = ' ';
+		for (int i = 0; i < a.length(); i++) {
+			Character c = a.charAt(i);
+			if (c <= 'Z' && c >= 'A' || c <= 'z' && c >= 'a') {
+				if (!count.containsKey(c)) {
+					count.put(c, 1);
+				/*	if (count.get(c) > b) {
+						b = count.get(c);
+						r = c;
+					}*/
+				} else {
+					count.put(c, count.get(c) + 1);
+					if (count.get(c) > b) {
+						b = count.get(c);
+						r = c;
+					}
+				}
+			}
+		}
+		return r;
+	}
+	
 }

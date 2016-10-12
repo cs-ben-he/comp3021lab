@@ -129,7 +129,7 @@ public class Folder implements Comparable<Folder>,Serializable {
 					if(S_array.length==1) 
 					{
 						if(n instanceof TextNote)
-						   bArray[j]=((TextNote) n).content.toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase());
+						   bArray[j]=((TextNote) n).getContent().toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase());
 						else	
 						   bArray[j] = n.getTitle().toLowerCase().contains(S_array[0].toLowerCase());
 						   ++i;	
@@ -140,7 +140,7 @@ public class Folder implements Comparable<Folder>,Serializable {
 						if(S_array[i].compareToIgnoreCase("or")!=0 && S_array[i+1].compareToIgnoreCase("or")!=0)
 					{
 						if(n instanceof TextNote)
-							bArray[j]=((TextNote) n).content.toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase());
+							bArray[j]=((TextNote) n).getContent().toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase());
 						else	
 						bArray[j]= n.getTitle().toLowerCase().contains(S_array[i].toLowerCase());
 						++i;
@@ -149,8 +149,8 @@ public class Folder implements Comparable<Folder>,Serializable {
 					    else if(S_array[i].compareToIgnoreCase("or")!=0 && S_array[i+1].compareToIgnoreCase("or")==0)
 					 {
 						if(n instanceof TextNote)
-						temp=((TextNote) n).content.toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase())
-						||((TextNote) n).content.toLowerCase().contains(S_array[i+2].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i+2].toLowerCase());
+						temp=((TextNote) n).getContent().toLowerCase().contains(S_array[i].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i].toLowerCase())
+						||((TextNote) n).getContent().toLowerCase().contains(S_array[i+2].toLowerCase())||((TextNote) n).getTitle().toLowerCase().contains(S_array[i+2].toLowerCase());
 						else
 						temp=n.getTitle().toLowerCase().contains(S_array[i].toLowerCase())||n.getTitle().toLowerCase().contains(S_array[i+2].toLowerCase());
 						
@@ -161,7 +161,7 @@ public class Folder implements Comparable<Folder>,Serializable {
 						  if(S_array[k+1].compareToIgnoreCase("or")==0)
 						  {
 							if(n instanceof TextNote)
-								temp=temp||((TextNote) n).content.toLowerCase().contains(S_array[k+2].toLowerCase())||n.getTitle().toLowerCase().contains(S_array[k+1].toLowerCase());
+								temp=temp||((TextNote) n).getContent().toLowerCase().contains(S_array[k+2].toLowerCase())||n.getTitle().toLowerCase().contains(S_array[k+1].toLowerCase());
 								
 							else
 							temp=temp||n.getTitle().toLowerCase().contains(S_array[k+2].toLowerCase());
