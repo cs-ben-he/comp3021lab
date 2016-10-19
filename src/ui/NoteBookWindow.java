@@ -113,7 +113,7 @@ public class NoteBookWindow extends Application {
 		Label label = new Label("Search:");
 		TextField textSearch= new TextField();
 		textSearch.setPrefWidth(200);
-		
+		//
 		
 		Button buttonSearch = new Button("Search");
 		buttonSearch.setPrefSize(100, 20);
