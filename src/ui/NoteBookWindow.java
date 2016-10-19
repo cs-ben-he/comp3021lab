@@ -108,7 +108,7 @@ public class NoteBookWindow extends Application {
 
 		hbox.getChildren().addAll(buttonLoad, buttonSave);
 		
-		//lab 7
+	    //lab 7
 	   //add "search" label/textField and two button (Search & Clear Search) objects
 		Label label = new Label("Search:");
 		TextField textSearch= new TextField();
@@ -121,36 +121,10 @@ public class NoteBookWindow extends Application {
 		buttonSearch.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent event){
-				
-				currentSearch = textSearch.getText();
-				textAreaNote.setText("");
-				
-				//TODO
-				//Store the titles of notes that we want to output
-				ArrayList<String> list = new ArrayList<String>();
-                
-				//create a new folder. 
-				Folder folder =new Folder("");
-								
-		        for(Folder f: noteBook.getFolders()){
-		        	
-		        	if(f.getName()==currentFolder){
-		        		
-		              for(Note n: f.getNotes()){
-		                  folder.addNote(n);
-		              }   // now folder contains all the nodes of currentFolder
-			        }
-		        }
-						
-		        //Use Folder.searchNotes() instead of NoteBook.searchNotes() because we search notes under a given folder.
-		        List<Note> N = folder.searchNotes(currentSearch);
-		        
-				for(Note n: N){
-					list.add(n.getTitle()); // add the search result to the list
-				}
-				
-				ObservableList<String> combox2 = FXCollections.observableArrayList(list);
-				titleslistView.setItems(combox2);
+				         
+			currentSearch = textSearch.getText();
+		    updateListView();
+		    
 			}	
 		});
 			
@@ -164,12 +138,10 @@ public class NoteBookWindow extends Application {
 				currentSearch = "";
 				textSearch.setText("");
 				textAreaNote.setText("");
-				
-				//TODO
 				updateListView(); 
 			}
 		});
-			
+		
 		hbox.getChildren().addAll(label, textSearch,buttonSearch,buttonRemove);
 		
 		return hbox;
@@ -186,7 +158,7 @@ public class NoteBookWindow extends Application {
 		vbox.setPadding(new Insets(10)); // Set all sides to 10
 		vbox.setSpacing(8); // Gap between nodes
 
-	//lab7
+	 //lab7
 	 //  foldersComboBox.getItems().addAll("FOLDER NAME 1", "FOLDER NAME 2", "FOLDER NAME 3");
      //  access the noteBook object and get all folder names 
 	   for(Folder f:noteBook.getFolders()){
@@ -200,6 +172,7 @@ public class NoteBookWindow extends Application {
 				 
 				// this contains the name of the folder selected
 				// TODO update listview
+				
 				updateListView();
 
 			}
@@ -246,31 +219,45 @@ public class NoteBookWindow extends Application {
 
 		return vbox;
 	}
-
-	private void updateListView() {
-		ArrayList<String> list = new ArrayList<String>();
+	
+//lab 7
+private void updateListView() {
+		
+	ArrayList<String> list = new ArrayList<String>();
 
 		// TODO populate the list object with all the TextNote titles of the
 		// currentFolder
-		//lab 7
-		//first get the notes list of currentFolder
-		// add the titles of the notes to the list
-		List<Note> notes = new ArrayList<Note>();
+		
+		
+	if(currentSearch==""){
+		
 		for(Folder f: noteBook.getFolders()){
 			
 			if(f.getName()==currentFolder)
-				notes= f.getNotes();
+				for(Note n:f.getNotes()){
+					list.add(n.getTitle());
+				}
 		}
+	}
+	else{
+		     textAreaNote.setText("");
+	         List<Note> notes=noteBook.searchNotes(currentSearch);
+	  
+	         for(Folder f:noteBook.getFolders()){
 		
-        for(Note n: notes){
-        	
-        	list.add(n.getTitle());
-        }
-        	
+		       if(f.getName()==currentFolder)
+			     for(Note n: notes){
+				   if(f.getNotes().contains(n))
+					  list.add(n.getTitle());
+			       }
+	         }
+	}
+		
+		
 		ObservableList<String> combox2 = FXCollections.observableArrayList(list);
 		titleslistView.setItems(combox2);
 		textAreaNote.setText("");
-	}
+}
 
 	/*
 	 * Creates a grid for the center region with four columns and three rows
@@ -301,7 +288,7 @@ public class NoteBookWindow extends Application {
 				"Each lab has 2 credits, 1 for attendence and the other is based the completeness of your lab.");
 
 		nb.createTextNote("Books", "The Throwback Special: A Novel",
-				"Here is the absorbing story of twenty-two men who gather every fall to painstakingly reenact what ESPN called �he most shocking play in NFL history�� and the Washington Redskins dubbed the �hrowback Special��: the November 1985 play in which the Redskins�� Joe Theismann had his leg horribly broken by Lawrence Taylor of the New York Giants live on Monday Night Football. With wit and great empathy, Chris Bachelder introduces us to Charles, a psychologist whose expertise is in high demand; George, a garrulous public librarian; Fat Michael, envied and despised by the others for being exquisitely fit; Jeff, a recently divorced man who has become a theorist of marriage; and many more. Over the course of a weekend, the men reveal their secret hopes, fears, and passions as they choose roles, spend a long night of the soul preparing for the play, and finally enact their bizarre ritual for what may be the last time. Along the way, mishaps, misunderstandings, and grievances pile up, and the comforting traditions holding the group together threaten to give way. The Throwback Special is a moving and comic tale filled with pitch-perfect observations about manhood, marriage, middle age, and the rituals we all enact as part of being alive.");
+				"Here is the absorbing story of twenty-two men who gather every fall to painstakingly reenact what ESPN called �he most shocking play in NFL history�� and the Washington Redskins dubbed the Throwback Special: the November 1985 play in which the Redskins�� Joe Theismann had his leg horribly broken by Lawrence Taylor of the New York Giants live on Monday Night Football. With wit and great empathy, Chris Bachelder introduces us to Charles, a psychologist whose expertise is in high demand; George, a garrulous public librarian; Fat Michael, envied and despised by the others for being exquisitely fit; Jeff, a recently divorced man who has become a theorist of marriage; and many more. Over the course of a weekend, the men reveal their secret hopes, fears, and passions as they choose roles, spend a long night of the soul preparing for the play, and finally enact their bizarre ritual for what may be the last time. Along the way, mishaps, misunderstandings, and grievances pile up, and the comforting traditions holding the group together threaten to give way. The Throwback Special is a moving and comic tale filled with pitch-perfect observations about manhood, marriage, middle age, and the rituals we all enact as part of being alive.");
 		nb.createTextNote("Books", "Another Brooklyn: A Novel",
 				"The acclaimed New York Times bestselling and National Book Award�inning author of Brown Girl Dreaming delivers her first adult novel in twenty years. Running into a long-ago friend sets memory from the 1970s in motion for August, transporting her to a time and a place where friendship was everything�ntil it wasn�. For August and her girls, sharing confidences as they ambled through neighborhood streets, Brooklyn was a place where they believed that they were beautiful, talented, brilliant� part of a future that belonged to them. But beneath the hopeful veneer, there was another Brooklyn, a dangerous place where grown men reached for innocent girls in dark hallways, where ghosts haunted the night, where mothers disappeared. A world where madness was just a sunset away and fathers found hope in religion. Like Louise Meriwether� Daddy Was a Number Runner and Dorothy Allison� Bastard Out of Carolina, Jacqueline Woodson� Another Brooklyn heartbreakingly illuminates the formative time when childhood gives way to adulthood�he promise and peril of growing up�nd exquisitely renders a powerful, indelible, and fleeting friendship that united four young lives.");
 
