@@ -30,6 +30,9 @@ public class TextNote extends Note implements Serializable
 		return this.content;
 	}
 	
+	public void setContent(String content){
+		this.content=content;
+	}
 	// lab 5
 	
 	private String getTextFromFile(String absolutePath){

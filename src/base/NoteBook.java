@@ -15,6 +15,10 @@ public class NoteBook implements Serializable{
 		folders= new ArrayList<Folder>();
 	}
 	
+	//lab 8
+	public void addFolder(String folderName){
+		this.folders.add(new Folder(folderName));
+	}
 	public boolean createTextNote(String folderName,String title)
 	{
 		TextNote Tnote= new TextNote(title);
@@ -107,7 +111,7 @@ public class NoteBook implements Serializable{
 		ObjectOutputStream out=null;
 		try{
 			//TODO
-			fos=new FileOutputStream("file.ser");
+			fos=new FileOutputStream(file);
 			out=new ObjectOutputStream(fos);
 			out.writeObject(this);
 			out.close();
@@ -123,7 +127,7 @@ public class NoteBook implements Serializable{
 		FileInputStream fis=null;
 		ObjectInputStream in=null;
 		try{
-			fis =new FileInputStream("file.ser");
+			fis =new FileInputStream(file);
 			in=new ObjectInputStream(fis);
 			NoteBook nb=(NoteBook)in.readObject();
 			this.folders=nb.folders;
