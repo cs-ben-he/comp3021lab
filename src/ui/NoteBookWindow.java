@@ -139,14 +139,8 @@ public class NoteBookWindow extends Application {
 				
 				File file = fileChooser.showOpenDialog(mainStage);
 				
-				if(file!=null){	
-					
+				if(file!=null){		
 					loadNoteBook(file);	
-					foldersComboBox.getItems().clear();
-					for(Folder f:noteBook.getFolders()){
-						   foldersComboBox.getItems().addAll(f.getName());
-					   }	
-					foldersComboBox.setValue("-----");
 				}
 			}
 		});
@@ -251,6 +245,9 @@ public class NoteBookWindow extends Application {
 		foldersComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue ov, Object t, Object t1) {
+				if (t1 == null||ov==null||t==null)
+					return;
+				
 				currentFolder = t1.toString();
 				 
 				// this contains the name of the folder selected
@@ -598,7 +595,11 @@ private void updateListView() {
 	private void loadNoteBook(File file){
 		
 		noteBook = new NoteBook(file.getAbsolutePath());
-
+		foldersComboBox.getItems().clear();
+		for(Folder f:noteBook.getFolders()){
+			foldersComboBox.getItems().addAll(f.getName());
+		 }	
+		foldersComboBox.setValue("-----");
 	}
 
 }
