@@ -75,21 +75,21 @@ public class PokemonScreenLAB9 extends Application {
 		
 		// lab 9: to get the start position of avatar
 		//method 1:
-/*		int px = new Random().nextInt(600);  
-		int py = new Random().nextInt(400);
+/*		int px = new Random().nextInt(W);  
+		int py = new Random().nextInt(H);
 		while(px % STEP_SIZE != 0){
-			 px = new Random().nextInt(600);
+			 px = new Random().nextInt(W);
 		}
 		while(py % STEP_SIZE != 0){
-			 py = new Random().nextInt(400);
+			 py = new Random().nextInt(H);
 		} 
 		
 		currentPosx = px; // currentPosx should be a multiple of STEP_SIZE
 		currentPosy = py;// currentPosy should be a multiple of STEP_SIZE
 */
 	//	method 2:
-		currentPosx = new Random().nextInt(15)*STEP_SIZE; // currentPosx should be a multiple of STEP_SIZE
-		currentPosy = new Random().nextInt(10)*STEP_SIZE; // currentPosx should be a multiple of STEP_SIZE
+		currentPosx = new Random().nextInt(W/STEP_SIZE)*STEP_SIZE; // currentPosx should be a multiple of STEP_SIZE
+		currentPosy = new Random().nextInt(H/STEP_SIZE)*STEP_SIZE; // currentPosx should be a multiple of STEP_SIZE
 		
 		
 		Group mapGroup = new Group();
