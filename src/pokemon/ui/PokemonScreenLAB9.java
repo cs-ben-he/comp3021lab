@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 //import pokemon.Pokemon;
 //import pokemon.Station;
 //import pokemon.Wall;
-
+//
 public class PokemonScreenLAB9 extends Application {
 
 	/**
