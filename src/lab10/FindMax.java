@@ -38,69 +38,40 @@ public class FindMax {
 	public void printMax() {
 		
 	    ExecutorService executor = Executors.newFixedThreadPool(3);
-	    
+	    int []max = new int[3];
 	    executor.execute(new Thread(){
 	    	public void run(){
-	    		int max = findMax(0,29);
-	    		System.out.println("the max value between 0 to 29 is " + max);
+	    		 max[0] = findMax(0,29);
+	   // 		 System.out.println("the max value between 0 to 29 is " + max[0]);
 	    	}
 	    });
 
 	    executor.execute(new Thread(){
 	    	public void run(){
-	    		int max = findMax(30,59);
-	    		System.out.println("the max value between 30 to 59 is " + max);
+	    		 max[1] = findMax(30,59);
+	    		
+	    //		System.out.println("the max value between 30 to 59 is " + max[1]);
+	  
 	    	}
 	    });
 	    
 	    executor.execute(new Thread(){
 	    	public void run(){
-	    		int max = findMax(60,89);
-	    		System.out.println("the max value between 60 to 89 is " + max);
+	    		 max[2] = findMax(60,89);
+	  //  		System.out.println("the max value between 60 to 89 is " + max[2]);
+	    				
 	    	}
 	    });
 	    
 	    executor.shutdown();
 	    
-	/*	 int []max = new int[3];
-		
-		Thread thread1 = new Thread(new Runnable(){
-			public void run(){
-			max[0] = findMax(0,29);
-			}
-		});
-		
-		
-		Thread thread2 = new Thread(new Runnable(){
-			public void run(){
-				max[1] = findMax(30,59);
-				if(max[0]>max[1])
-					max[1]=max[0];
-			}
-		});
-	
-		
-		
-		Thread thread3 = new Thread(new Runnable(){
-			public void run(){
-				max[2] = findMax(60,89);
-				if(max[1]>max[2])
-					max[2]=max[1];
-				
-				System.out.println("the max value is " + max[2]);
-			}
-		});
-		
-		try {
-			thread1.start();
-			thread1.join(); // wait until t1 is done
-			thread2.start();
-			thread2.join(); // wait until t2 is done
-			thread3.start();
-			} catch (InterruptedException ie) {
-			ie.printStackTrace();
-			}*/
-
+	    int maxValue =max[0];
+	    for (int i=1;i<3;++i){
+	    	if(maxValue<max[i])
+	    		maxValue = max[i];
+	    }
+	    
+	    System.out.println("the max value between 0 to 89 is " +maxValue);
 	}
 
 	/**
